@@ -17,7 +17,12 @@
  */
 function URLShortener($file = 'shorten.db', $table = 'shortened', $init = true)
 {
-    # Base HREF for links, e.g. http://short.co/$id
+    # Base HREF for links, e.g. http://example.com/go/{{id}}
+    # {{id}} will be replacd with the ID of the URL so if for
+    # some reason you want stuff after it, that's fine.
+    # This default is a basic guess at the right URL to use,
+    # it should produce something like:
+    # http://localhost/scripts/urlshortener.php/{{id}}
     $href = ('on' === getenv('HTTPS') ? 'https://' : 'http://')
           . (getenv('HTTP_HOST') ?: getenv('SERVER_NAME'))
           . ('/'.trim(getenv('SCRIPT_NAME'), '/').'/{{id}}');
